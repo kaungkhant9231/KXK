@@ -1,2 +1,6 @@
 .DS_Store
+**/.DS_Store
 Photo*/
+!photos/
+!photos/**
+photos.zip

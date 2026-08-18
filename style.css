@@ -591,17 +591,19 @@ a.card:hover .quick-link { text-decoration: underline; }
 
 .shots {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-  gap: 10px;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: 12px;
   margin: 14px 0 18px;
 }
 
 .shots img {
   width: 100%;
+  max-height: 280px;
   border-radius: 10px;
   border: 1px solid var(--border);
   display: block;
-  object-fit: cover;
+  object-fit: contain;
+  background: var(--bg-alt);
 }
 
 .platform-card .btn {
@@ -650,3 +652,176 @@ a.card:hover .quick-link { text-decoration: underline; }
 }
 
 .support-note + .support-note { margin-top: 8px; }
+
+/* =========================================================
+   Additions: Android phone mockups (download page)
+   ========================================================= */
+
+.phone-mockups {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  justify-content: center;
+  margin: 14px 0 18px;
+}
+
+.phone {
+  width: 150px;
+  flex-shrink: 0;
+  padding: 7px;
+  background: #111827;
+  border-radius: 22px;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+}
+
+html[data-theme="dark"] .phone { background: #0b1220; }
+
+.phone img {
+  width: 100%;
+  height: auto;
+  border-radius: 14px;
+  display: block;
+  background: #fff;
+}
+
+/* =========================================================
+   Additions: Play Store style screenshot carousel
+   ========================================================= */
+
+.shots-carousel {
+  position: relative;
+  margin: 14px 0 18px;
+}
+
+.carousel-track {
+  display: flex;
+  gap: 12px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  touch-action: pan-x;
+  padding: 6px 4px 12px;
+  scrollbar-width: none;
+}
+
+.carousel-track::-webkit-scrollbar { display: none; }
+
+.carousel-track .phone {
+  flex-shrink: 0;
+  scroll-snap-align: center;
+  width: 108px;
+  padding: 5px;
+  border-radius: 18px;
+  background: #111827;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+}
+
+html[data-theme="dark"] .carousel-track .phone { background: #0b1220; }
+
+.carousel-track .phone img {
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+  display: block;
+  background: #fff;
+}
+
+.carousel-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  background: var(--bg);
+  color: var(--text);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--shadow);
+  z-index: 2;
+  font-size: 15px;
+  line-height: 1;
+  padding: 0;
+}
+
+.carousel-btn.prev { left: -6px; }
+.carousel-btn.next { right: -6px; }
+
+/* =========================================================
+   Additions: lightbox (full-width screenshot view)
+   + mobile size fixes
+   ========================================================= */
+
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(2, 6, 23, 0.92);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+}
+
+.lightbox.open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.lightbox-img {
+  max-width: 92vw;
+  max-height: 85vh;
+  border-radius: 8px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+  object-fit: contain;
+  background: #0b1220;
+}
+
+.lightbox-close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(255, 255, 255, 0.15);
+  color: #fff;
+  font-size: 22px;
+  line-height: 1;
+  cursor: pointer;
+  z-index: 2;
+}
+
+.lightbox-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(255, 255, 255, 0.15);
+  color: #fff;
+  font-size: 22px;
+  line-height: 1;
+  cursor: pointer;
+  z-index: 2;
+}
+
+.lightbox-btn.prev { left: 16px; }
+.lightbox-btn.next { right: 16px; }
+
+/* ---------- Mobile size fixes ---------- */
+@media (max-width: 720px) {
+  .carousel-track .phone { width: 96px; }
+  .lightbox-img { max-width: 94vw; max-height: 80vh; }
+  .lightbox-btn { width: 38px; height: 38px; font-size: 19px; }
+  .lightbox-close { width: 36px; height: 36px; font-size: 19px; }
+}

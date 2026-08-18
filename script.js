@@ -180,5 +180,115 @@
     initMenu();
     initReveal();
     initYear();
+    initCarousel();
+    initLightbox();
   });
+
+  /* Play Store style screenshot carousel: swipe / drag / arrows */
+  function initCarousel() {
+    var tracks = document.querySelectorAll(".carousel-track");
+    for (var i = 0; i < tracks.length; i++) {
+      (function (track) {
+        var prev = track.parentElement.querySelector(".carousel-btn.prev");
+        var next = track.parentElement.querySelector(".carousel-btn.next");
+
+        function scrollByAmount(dir) {
+          track.scrollBy({ left: dir * Math.round(track.clientWidth * 0.8), behavior: "smooth" });
+        }
+        if (next) next.addEventListener("click", function () { scrollByAmount(1); });
+        if (prev) prev.addEventListener("click", function () { scrollByAmount(-1); });
+
+        var down = false, startX = 0, startScroll = 0, moved = 0;
+        track.addEventListener("pointerdown", function (e) {
+          if (e.pointerType !== "mouse") return;
+          down = true; moved = 0;
+          startX = e.clientX;
+          startScroll = track.scrollLeft;
+        });
+        track.addEventListener("pointermove", function (e) {
+          if (!down) return;
+          var dx = e.clientX - startX;
+          moved = Math.max(moved, Math.abs(dx));
+          track.scrollLeft = startScroll - dx;
+        });
+        function up() { down = false; }
+        track.addEventListener("pointerup", up);
+        track.addEventListener("pointercancel", up);
+        track.addEventListener("click", function (e) { if (moved > 6) e.preventDefault(); });
+      })(tracks[i]);
+    }
+  }
+
+  /* Lightbox: tap any screenshot to view it enlarged */
+  function initLightbox() {
+    var box = document.getElementById("lightbox");
+    if (!box) return;
+
+    var img = box.querySelector(".lightbox-img");
+    var prevBtn = box.querySelector(".lightbox-btn.prev");
+    var nextBtn = box.querySelector(".lightbox-btn.next");
+    var closeBtn = box.querySelector(".lightbox-close");
+    var group = [];
+    var index = 0;
+
+    function openAt(i) {
+      if (group.length === 0) return;
+      index = (i + group.length) % group.length;
+      img.src = group[index].src;
+      img.alt = group[index].alt || "Screenshot preview";
+      box.classList.add("open");
+      box.setAttribute("aria-hidden", "false");
+    }
+
+    function close() {
+      box.classList.remove("open");
+      box.setAttribute("aria-hidden", "true");
+      img.src = "";
+    }
+
+    /* wire up every screenshot group (carousel + plain shots) */
+    var containers = document.querySelectorAll(".carousel-track, .shots");
+    for (var c = 0; c < containers.length; c++) {
+      (function (container) {
+        var imgs = container.querySelectorAll("img");
+        for (var k = 0; k < imgs.length; k++) {
+          (function (im) {
+            im.style.cursor = "zoom-in";
+            im.addEventListener("click", function (e) {
+              e.preventDefault();
+              group = [];
+              for (var g = 0; g < imgs.length; g++) group.push(imgs[g]);
+              for (var find = 0; find < group.length; find++) {
+                if (group[find] === im) { openAt(find); break; }
+              }
+            });
+          })(imgs[k]);
+        }
+      })(containers[c]);
+    }
+
+    if (prevBtn) prevBtn.addEventListener("click", function (e) { e.stopPropagation(); openAt(index - 1); });
+    if (nextBtn) nextBtn.addEventListener("click", function (e) { e.stopPropagation(); openAt(index + 1); });
+    if (closeBtn) closeBtn.addEventListener("click", close);
+    box.addEventListener("click", function (e) { if (e.target === box) close(); });
+
+    document.addEventListener("keydown", function (e) {
+      if (!box.classList.contains("open")) return;
+      if (e.key === "Escape") close();
+      if (e.key === "ArrowLeft") openAt(index - 1);
+      if (e.key === "ArrowRight") openAt(index + 1);
+    });
+
+    /* swipe on touch devices */
+    var startX = null;
+    box.addEventListener("touchstart", function (e) { startX = e.touches[0].clientX; }, { passive: true });
+    box.addEventListener("touchend", function (e) {
+      if (startX === null) return;
+      var dx = e.changedTouches[0].clientX - startX;
+      if (Math.abs(dx) > 50) {
+        if (dx < 0) openAt(index + 1); else openAt(index - 1);
+      }
+      startX = null;
+    }, { passive: true });
+  }
 })();
