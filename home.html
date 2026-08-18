@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>try{document.documentElement.setAttribute("data-theme",localStorage.getItem("site-theme")||(matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light"))}catch(e){}</script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="KXK — welcome, services, apps and contact" />
+  <title>KXK</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- Header ကို components/header.html ကနေ script.js က ထည့်ပေးပါတယ် -->
+  <header id="siteHeader"></header>
+
+  <main>
+    <!-- ================= HERO (Home) ================= -->
+    <section id="home" class="hero">
+      <div class="container hero-inner">
+        <div class="avatar" aria-hidden="true">KXK</div>
+        <!-- ✏️ EDIT: hero စာသား -->
+        <h1 class="hero-title" data-i18n data-en="Welcome to  KXK" data-mm="KXK မှ ကြိုဆိုပါတယ်">Welcome to KXK</h1>
+        <!-- ✏️ EDIT: short tagline -->
+        <p class="hero-sub" data-i18n data-en="Your trusted source for services and apps." data-mm="ဝန်ဆောင်မှုတွေနဲ့ app တွေအတွက် သင်ယုံကြည်စိတ်ချနိုင်တဲ့ နေရာ။">Your trusted source for services and apps.</p>
+        <div class="hero-actions">
+          <a href="services.html" class="btn btn-primary" data-i18n data-en="Our Services" data-mm="ဝန်ဆောင်မှုများ">Our Services</a>
+          <a href="download.html" class="btn btn-outline" data-i18n data-en="Download Apps" data-mm="App ဒေါင်းလုဒ်">Download Apps</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= QUICK LINKS ================= -->
+    <section class="section section-alt">
+      <div class="container">
+        <h2 class="section-title" data-i18n data-en="Explore" data-mm="စူးစမ်းကြည့်ပါ">Explore</h2>
+        <p class="section-sub" data-i18n data-en="Everything you need in one place" data-mm="လိုအပ်သမျှ အားလုံး တစ်နေရာတည်းမှာ">Everything you need in one place</p>
+
+        <div class="cards">
+          <a class="card reveal" href="services.html">
+            <h3 data-i18n data-en="Services" data-mm="ဝန်ဆောင်မှုများ">Services</h3>
+            <p data-i18n data-en="Accounts, Apple, mobile phones & more" data-mm="အကောင့်၊ Apple၊ မိုဘိုင်းဖုန်းနှင့် အခြား">Accounts, Apple, mobile phones & more</p>
+            <span class="quick-link" data-i18n data-en="Open →" data-mm="ဖွင့်ရန် →">Open →</span>
+          </a>
+
+          <a class="card reveal" href="apps.html">
+            <h3 data-i18n data-en="Apps" data-mm="အက်ပ်များ">Apps</h3>
+            <p data-i18n data-en="My current apps" data-mm="လက်ရှိ ကျွန်တော်/ကျွန်မ ရဲ့ app များ">My current apps</p>
+            <span class="quick-link" data-i18n data-en="Open →" data-mm="ဖွင့်ရန် →">Open →</span>
+          </a>
+
+          <a class="card reveal" href="download.html">
+            <h3 data-i18n data-en="Download" data-mm="ဒေါင်းလုဒ်">Download</h3>
+            <p data-i18n data-en="Get my apps" data-mm="App များကို ရယူပါ">Get my apps</p>
+            <span class="quick-link" data-i18n data-en="Open →" data-mm="ဖွင့်ရန် →">Open →</span>
+          </a>
+
+          <a class="card reveal" href="performance.html">
+            <h3 data-i18n data-en="Performance" data-mm="စွမ်းဆောင်ရည်">Performance</h3>
+            <p data-i18n data-en="Speed, size & reliability" data-mm="မြန်ဆန်မှု၊ အရွယ်အစားနဲ့ ယုံကြည်စိတ်ချရမှု">Speed, size & reliability</p>
+            <span class="quick-link" data-i18n data-en="Open →" data-mm="ဖွင့်ရန် →">Open →</span>
+          </a>
+
+          <a class="card reveal" href="about.html">
+            <h3 data-i18n data-en="About" data-mm="အကြောင်း">About</h3>
+            <p data-i18n data-en="Who I am" data-mm="ကျွန်တော်/ကျွန်မ အကြောင်း">Who I am</p>
+            <span class="quick-link" data-i18n data-en="Open →" data-mm="ဖွင့်ရန် →">Open →</span>
+          </a>
+
+          <a class="card reveal" href="contact.html">
+            <h3 data-i18n data-en="Contact" data-mm="ဆက်သွယ်ရန်">Contact</h3>
+            <p data-i18n data-en="Get in touch" data-mm="ဆက်သွယ်ပါ">Get in touch</p>
+            <span class="quick-link" data-i18n data-en="Open →" data-mm="ဖွင့်ရန် →">Open →</span>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer ကို components/footer.html ကနေ script.js က ထည့်ပေးပါတယ် -->
+  <footer id="siteFooter"></footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
