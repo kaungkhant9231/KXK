@@ -267,6 +267,21 @@
       })(containers[c]);
     }
 
+    /* service sub-headings open their sample screenshots (services page) */
+    var sampleButtons = document.querySelectorAll(".service-sub[data-samples]");
+    for (var s = 0; s < sampleButtons.length; s++) {
+      (function (btn) {
+        btn.addEventListener("click", function () {
+          var container = document.querySelector(btn.getAttribute("data-samples"));
+          if (!container) return;
+          var imgs = container.querySelectorAll("img");
+          group = [];
+          for (var g = 0; g < imgs.length; g++) group.push(imgs[g]);
+          openAt(0);
+        });
+      })(sampleButtons[s]);
+    }
+
     if (prevBtn) prevBtn.addEventListener("click", function (e) { e.stopPropagation(); openAt(index - 1); });
     if (nextBtn) nextBtn.addEventListener("click", function (e) { e.stopPropagation(); openAt(index + 1); });
     if (closeBtn) closeBtn.addEventListener("click", close);

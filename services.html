@@ -33,16 +33,25 @@
             </div>
             <h3 data-i18n data-en="Account" data-mm="အကောင့်">Account</h3>
             <div class="service-list">
-              <p class="service-sub" data-i18n data-en="Telegram Service" data-mm="တယ်လီဂရမ် ဝန်ဆောင်မှု">Telegram Service</p>
+              <button type="button" class="service-sub" data-samples=".tg-samples" title="View samples" data-i18n data-en="Telegram Service" data-mm="တယ်လီဂရမ် ဝန်ဆောင်မှု">Telegram Service</button>
               <ul>
                 <li data-i18n data-en="SMS Fee" data-mm="SMS ကြေး">SMS Fee</li>
                 <li data-i18n data-en="Premium" data-mm="Premium">Premium</li>
               </ul>
-              <p class="service-sub" data-i18n data-en="Viber Service" data-mm="Viber ဝန်ဆောင်မှု">Viber Service</p>
+              <button type="button" class="service-sub" data-samples=".vb-samples" title="View samples" data-i18n data-en="Viber Service" data-mm="Viber ဝန်ဆောင်မှု">Viber Service</button>
               <ul>
                 <li data-i18n data-en="Account Create" data-mm="အကောင့် ဖန်တီးခြင်း">Account Create</li>
                 <li data-i18n data-en="Activation Failed" data-mm="Activation မအောင်မြင်မှု ပြုပြင်ခြင်း">Activation Failed</li>
               </ul>
+              <!-- ✏️ EDIT: Sample screenshots (hidden; click the service name above to view) -->
+              <div class="shots tg-samples" hidden>
+                <img src="photos/telegram/telegram-1.jpg" alt="Telegram sample 1" loading="lazy" />
+                <img src="photos/telegram/telegram-2.jpg" alt="Telegram sample 2" loading="lazy" />
+                <img src="photos/telegram/telegram-3.jpg" alt="Telegram sample 3" loading="lazy" />
+              </div>
+              <div class="shots vb-samples" hidden>
+                <img src="photos/viber/viber-1.jpg" alt="Viber sample 1" loading="lazy" />
+              </div>
             </div>
           </article>
 
@@ -99,6 +108,14 @@
   </main>
 
   <footer id="siteFooter"></footer>
+
+  <!-- Lightbox: click a service name to view sample screenshots -->
+  <div class="lightbox" id="lightbox" aria-hidden="true">
+    <button class="lightbox-close" type="button" aria-label="Close">×</button>
+    <button class="lightbox-btn prev" type="button" aria-label="Previous image">‹</button>
+    <img class="lightbox-img" src="" alt="Screenshot preview" />
+    <button class="lightbox-btn next" type="button" aria-label="Next image">›</button>
+  </div>
 
   <script src="script.js"></script>
 </body>
