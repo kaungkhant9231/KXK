@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>try{document.documentElement.setAttribute("data-theme",localStorage.getItem("site-theme")||(matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light"))}catch(e){}</script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Posts — news, updates and casual posts — KXK" />
+  <title>Posts — KXK</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <header id="siteHeader"></header>
+
+  <main>
+    <!-- ================= PAGE HERO ================= -->
+    <section class="page-hero">
+      <div class="container">
+        <h1 data-i18n data-en="Posts" data-mm="ပို့စ်များ">Posts</h1>
+        <p data-i18n data-en="News, updates and casual posts" data-mm="သတင်း၊ အပ်ဒိတ်နဲ့ အပျင်းပြေ ပို့စ်များ">News, updates and casual posts</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+
+        <!-- Supabase setup မပြီးသေးရင် ပြမယ် -->
+        <p class="setup-note" id="setupNote" style="display:none;" data-i18n
+           data-en="Posts are not configured yet — open SUPABASE-SETUP.md in the project folder and follow the steps."
+           data-mm="Posts ကို ချိတ်ဆက်မထားသေးပါ — project folder ထဲက SUPABASE-SETUP.md ကို ဖတ်ပြီး အတိုင်းလိုက်လုပ်ပါ။">
+          Posts are not configured yet — open SUPABASE-SETUP.md in the project folder and follow the steps.
+        </p>
+
+        <!-- ================= ADMIN BAR ================= -->
+        <div class="post-admin" id="postAdmin">
+          <!-- Not logged in -->
+          <button class="btn btn-outline" id="loginBtn" type="button" data-i18n
+                  data-en="＋ Post (Admin Login)" data-mm="＋ Post တင်ရန် (Admin ဝင်ရန်)">＋ Post (Admin Login)</button>
+
+          <!-- Logged in: compose box -->
+          <div class="compose-box" id="composeBox" style="display:none;">
+            <textarea id="postText" rows="4" placeholder="Share something..."></textarea>
+            <div class="compose-actions">
+              <label class="file-btn" id="fileLabel">
+                <input type="file" id="postImage" accept="image/*" />
+                <span data-i18n data-en="📷 Add image" data-mm="📷 ပုံထည့်ရန်">📷 Add image</span>
+              </label>
+              <span class="file-name" id="fileName"></span>
+              <button class="btn btn-primary" id="submitBtn" type="button" data-i18n
+                      data-en="Post" data-mm="တင်မည်">Post</button>
+            </div>
+            <p class="admin-status" id="adminStatus"></p>
+          </div>
+
+          <!-- Logout -->
+          <button class="btn btn-outline logout-btn" id="logoutBtn" type="button" style="display:none;" data-i18n
+                  data-en="Logout" data-mm="ထွက်မည်">Logout</button>
+        </div>
+
+        <!-- ================= FEED ================= -->
+        <div class="post-feed" id="postFeed"></div>
+        <p class="support-note" id="postEmpty" style="display:none;">No posts yet — be the first to post!</p>
+
+      </div>
+    </section>
+  </main>
+
+  <footer id="siteFooter"></footer>
+
+  <!-- Admin login modal (script.js ရဲ့ lightbox နဲ့ မရောထွေးအောင် id=loginModal သုံးထား) -->
+  <div class="lightbox" id="loginModal" aria-hidden="true">
+    <div class="login-card">
+      <h3 data-i18n data-en="Admin Login" data-mm="အက်ဒမင် ဝင်ရန်">Admin Login</h3>
+      <p class="login-hint" data-i18n data-en="Use the Supabase account you created." data-mm="Supabase မှာ ဖွင့်ထားတဲ့ အကောင့်နဲ့ ဝင်ပါ။">Use the Supabase account you created.</p>
+      <form id="loginForm" novalidate>
+        <input class="field" id="loginEmail" type="email" placeholder="Email" autocomplete="email" required />
+        <input class="field" id="loginPassword" type="password" placeholder="Password" autocomplete="current-password" required />
+        <p class="login-error" id="loginError"></p>
+        <button class="btn btn-primary login-submit" type="submit" data-i18n
+                data-en="Login" data-mm="ဝင်မည်">Login</button>
+      </form>
+      <button class="login-close" id="loginClose" type="button" aria-label="Close">×</button>
+    </div>
+  </div>
+
+  <script src="supabase-config.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="posts.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

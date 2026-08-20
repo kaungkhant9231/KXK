@@ -857,3 +857,230 @@ html[data-theme="dark"] .carousel-track .phone { background: #000000; }
   .lightbox-btn { width: 38px; height: 38px; font-size: 19px; }
   .lightbox-close { width: 36px; height: 36px; font-size: 19px; }
 }
+
+/* =========================================================
+   Additions: posts page (Supabase mini feed)
+   ========================================================= */
+
+.post-admin {
+  max-width: 640px;
+  margin: 0 auto 8px;
+  text-align: center;
+}
+
+.compose-box {
+  text-align: left;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px;
+  box-shadow: var(--shadow);
+}
+
+.compose-box textarea {
+  width: 100%;
+  min-height: 110px;
+  padding: 12px 14px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--bg);
+  color: var(--text);
+  font: inherit;
+  font-size: 1rem; /* 16px — iOS auto-zoom မဖြစ်အောင် */
+  line-height: 1.6;
+  resize: vertical;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.compose-box textarea:focus { border-color: var(--accent); }
+
+.compose-actions {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-top: 14px;
+  flex-wrap: wrap;
+}
+
+.file-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 9px 16px;
+  border: 1.5px solid var(--border);
+  border-radius: 999px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text);
+  cursor: pointer;
+  transition: border-color 0.2s, color 0.2s;
+}
+
+.file-btn:hover { border-color: var(--accent); color: var(--accent); }
+
+.file-btn input[type="file"] { display: none; }
+
+.file-name {
+  color: var(--muted);
+  font-size: 0.85rem;
+  max-width: 180px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.admin-status {
+  margin-top: 10px;
+  font-size: 0.85rem;
+  color: var(--muted);
+  min-height: 1.2em;
+}
+
+.logout-btn { margin-top: 14px; }
+
+.post-feed {
+  max-width: 640px;
+  margin: 28px auto 0;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.post-card {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 22px 24px;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.post-card:hover {
+  border-color: var(--accent);
+  box-shadow: var(--shadow);
+}
+
+.post-content {
+  font-size: 1rem;
+  line-height: 1.7;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.post-image {
+  width: 100%;
+  max-height: 420px;
+  object-fit: contain;
+  background: var(--bg-alt);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  margin-top: 14px;
+  display: block;
+}
+
+.post-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 14px;
+  padding-top: 12px;
+  border-top: 1px dashed var(--border);
+}
+
+.post-date { color: var(--muted); font-size: 0.85rem; }
+
+.delete-btn {
+  padding: 4px 14px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: none;
+  color: #dc2626;
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: border-color 0.2s, background 0.2s;
+}
+
+.delete-btn:hover {
+  border-color: #dc2626;
+  background: rgba(220, 38, 38, 0.08);
+}
+
+/* Login modal */
+.login-card {
+  position: relative;
+  width: min(360px, 90vw);
+  background: var(--bg);
+  border-radius: var(--radius);
+  padding: 30px 26px 26px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+}
+
+.login-card h3 {
+  font-size: 1.25rem;
+  font-weight: 800;
+  margin-bottom: 4px;
+}
+
+.login-hint {
+  color: var(--muted);
+  font-size: 0.88rem;
+  margin-bottom: 16px;
+}
+
+.field {
+  width: 100%;
+  padding: 11px 14px;
+  margin-bottom: 12px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--bg);
+  color: var(--text);
+  font: inherit;
+  font-size: 1rem;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.field:focus { border-color: var(--accent); }
+
+.login-submit { width: 100%; }
+
+.login-error {
+  color: #dc2626;
+  font-size: 0.85rem;
+  min-height: 1.2em;
+  margin-bottom: 10px;
+}
+
+.login-close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: none;
+  background: var(--bg-alt);
+  color: var(--muted);
+  font-size: 18px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.login-close:hover { color: var(--text); }
+
+.setup-note {
+  max-width: 640px;
+  margin: 0 auto 24px;
+  text-align: center;
+  padding: 14px 18px;
+  border: 1px solid #f59e0b;
+  border-radius: 10px;
+  background: rgba(245, 158, 11, 0.1);
+  color: #b45309;
+  font-size: 0.9rem;
+}
+
+html[data-theme="dark"] .setup-note { color: #fbbf24; }

@@ -13,6 +13,7 @@
 personal-website/
 ├── index.html          → redirect သာဖြစ်ပြီး home.html ကို အလိုအလျောက် ပို့ပေးတယ်
 ├── home.html           → ပင်မစာမျက်နှာ ("Warmly Welcome to KK" + လင့်များ)
+├── posts.html          → Posts (Supabase feed — post တင်/ဖျက် လို့ရတဲ့ နေရာ)
 ├── services.html       → Services (Account / Apple / Mobile Phone / Hardware)
 ├── apps.html           → Apps (IC Finder Pro စသည်)
 ├── download.html       → Download (app download links ထည့်ရမယ့်နေရာ)
@@ -104,6 +105,16 @@ vercel.com → **Add New… → Project** → **Import Git Repository** → Depl
 - GitHub: `git push`
 
 ---
+
+## Posts စာမျက်နှာ (Supabase)
+
+`posts.html` က Facebook လို post တင် / ဖျက် လို့ရတဲ့ စာမျက်နှာပါ။ Post တွေကို Supabase (အခမဲ့ cloud database) မှာ သိမ်းပါတယ်။
+
+- Setup လုပ်ဖို့ (တစ်ခါပဲ): **`SUPABASE-SETUP.md`** ကို ဖတ်ပါ
+- Database ဖွဲ့စည်းပုံ script: **`supabase-setup.sql`** (SQL Editor မှာ run ရတယ်)
+- Config: **`supabase-config.js`** ထဲ Project URL + anon key ထည့်ပါ
+- လူတိုင်း post ဖတ်လို့ရတယ် — မင်းပဲ login ဝင်ပြီး post တင် / ဖျက် လို့ရတယ်
+- Post တဲ့အခါ ပုံလည်း တွဲတင်လို့ရတယ် (Supabase Storage မှာ သိမ်းတယ်)
 
 ## ကိုယ်ပိုင် domain
 
