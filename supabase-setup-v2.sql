@@ -44,7 +44,9 @@ create trigger on_auth_user_created
   for each row execute function public.handle_new_user();
 
 -- 2) POSTS — author (user_id) column ထည့်ပါ (v1 table ရှိပြီးသား)
-alter table public.posts add column if not exists user_id uuid references auth.users (id) on delete cascade;
+-- ⚠️ user_id ကို profiles(id) နဲ့ ချိတ်ရမယ် (auth.users နဲ့ချိတ်ရင်
+--    PostgREST က posts↔profiles join လုပ်လို့မရ — feed ပေါ်မှာ error တက်တယ်)
+alter table public.posts add column if not exists user_id uuid references public.profiles (id) on delete cascade;
 
 -- အရင်က post တွေက admin ပိုင်အဖြစ် backfill
 update public.posts set user_id = (select id from auth.users where email = 'kxk@admin.com')
@@ -56,7 +58,7 @@ create index if not exists posts_user_id_idx on public.posts (user_id);
 -- 3) LIKES — post တစ်ခုကို user တစ်ယောက် like တစ်ခါပဲ
 create table if not exists public.likes (
   post_id uuid not null references public.posts (id) on delete cascade,
-  user_id uuid not null references auth.users (id) on delete cascade,
+  user_id uuid not null references public.profiles (id) on delete cascade,
   created_at timestamptz not null default now(),
   primary key (post_id, user_id)
 );
@@ -65,7 +67,7 @@ create table if not exists public.likes (
 create table if not exists public.comments (
   id uuid primary key default gen_random_uuid(),
   post_id uuid not null references public.posts (id) on delete cascade,
-  user_id uuid not null references auth.users (id) on delete cascade,
+  user_id uuid not null references public.profiles (id) on delete cascade,
   content text not null,
   created_at timestamptz not null default now()
 );
