@@ -24,7 +24,9 @@
     download:    { en: "Download — KXK",                my: "ဒေါင်းလုဒ် — KXK" },
     performance: { en: "Performance — KXK",             my: "စွမ်းဆောင်ရည် — KXK" },
     about:       { en: "About — KXK",                   my: "အကြောင်း — KXK" },
-    contact:     { en: "Contact — KXK",                 my: "ဆက်သွယ်ရန် — KXK" }
+    contact:     { en: "Contact — KXK",                 my: "ဆက်သွယ်ရန် — KXK" },
+    profile:     { en: "Profile — KXK",                 my: "Profile — KXK" },
+    admin:       { en: "Admin — KXK",                   my: "အက်ဒမင် — KXK" }
   };
   var pageTitle = titles[file] || { en: "KXK", my: "KXK" };
 

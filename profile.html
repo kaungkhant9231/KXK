@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>try{document.documentElement.setAttribute("data-theme",localStorage.getItem("site-theme")||(matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light"))}catch(e){}</script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="User profile — KXK" />
+  <title>Profile — KXK</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <header id="siteHeader"></header>
+
+  <main>
+    <section class="section">
+      <div class="container">
+
+        <p class="setup-note" id="setupNote" style="display:none;" data-i18n
+           data-en="Not configured yet — follow SUPABASE-SETUP-V2.md in the project folder."
+           data-mm="ချိတ်ဆက်မထားသေးပါ — project folder ထဲက SUPABASE-SETUP-V2.md ကို ဖတ်ပါ။">
+          Not configured yet — follow SUPABASE-SETUP-V2.md in the project folder.
+        </p>
+
+        <div class="profile-card" id="profileCard" style="display:none;">
+          <div class="profile-head">
+            <div class="avatar avatar-lg avatar-letter" id="pAvatar">?</div>
+            <div class="profile-info">
+              <h1 id="pName">…</h1>
+              <p class="p-handle" id="pHandle"></p>
+              <p class="p-bio" id="pBio"></p>
+              <p class="p-meta" id="pJoined"></p>
+            </div>
+            <button class="btn btn-outline" id="editBtn" type="button" style="display:none;" data-i18n
+                    data-en="Edit profile" data-mm="Profile ပြင်ရန်">Edit profile</button>
+          </div>
+
+          <!-- Edit (own profile only) -->
+          <div class="compose-box" id="editBox" style="display:none;">
+            <label class="file-btn">
+              <input type="file" id="avatarInput" accept="image/*" />
+              <span data-i18n data-en="📷 Change photo" data-mm="📷 ပုံပြောင်းရန်">📷 Change photo</span>
+            </label>
+            <input class="field" id="editName" type="text" placeholder="Display name" style="margin-top:12px;" />
+            <textarea class="field" id="editBio" rows="2" placeholder="About you..."></textarea>
+            <div class="compose-actions">
+              <button class="btn btn-primary" id="saveBtn" type="button" data-i18n
+                      data-en="Save" data-mm="သိမ်းမည်">Save</button>
+              <button class="btn btn-outline" id="cancelBtn" type="button" data-i18n
+                      data-en="Cancel" data-mm="မလုပ်တော့">Cancel</button>
+            </div>
+            <p class="admin-status" id="editStatus"></p>
+          </div>
+
+          <h2 class="profile-posts-title" data-i18n data-en="Posts" data-mm="ပို့စ်များ">Posts</h2>
+          <div class="post-feed" id="pFeed"></div>
+          <p class="support-note" id="pEmpty" style="display:none;"></p>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <footer id="siteFooter"></footer>
+
+  <script src="supabase-config.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="profile.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

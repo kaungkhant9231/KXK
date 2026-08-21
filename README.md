@@ -108,13 +108,18 @@ vercel.com → **Add New… → Project** → **Import Git Repository** → Depl
 
 ## Posts စာမျက်နှာ (Supabase)
 
-`posts.html` က Facebook လို post တင် / ဖျက် လို့ရတဲ့ စာမျက်နှာပါ။ Post တွေကို Supabase (အခမဲ့ cloud database) မှာ သိမ်းပါတယ်။
+`posts.html` က social feed ပါ — user တွေ account ဖွင့်၊ post တင်၊ like ❤️ comment 💬 share 📤 လုပ်လို့ရတယ်။ Post တွေကို Supabase (အခမဲ့ cloud database) မှာ သိမ်းပါတယ်။
 
-- Setup လုပ်ဖို့ (တစ်ခါပဲ): **`SUPABASE-SETUP.md`** ကို ဖတ်ပါ
-- Database ဖွဲ့စည်းပုံ script: **`supabase-setup.sql`** (SQL Editor မှာ run ရတယ်)
+**V2 (upgrade — user accounts + admin panel):**
+- Setup: **`SUPABASE-SETUP-V2.md`** (SQL + edge function deploy)
+- Database script: **`supabase-setup-v2.sql`**
+- Admin edge function: **`supabase/functions/admin/index.ts`** (dashboard Functions မှာ deploy)
+- Admin panel: **`admin.html`** (user စာရင်း / ban-unban / ဖျက် + post/comment စီမံ)
+- User profile: **`profile.html`** (အကောင့်တိုင်း ကိုယ်ပိုင် profile)
+
+**V1 (အခြေခံ):**
+- Setup: `SUPABASE-SETUP.md` + `supabase-setup.sql`
 - Config: **`supabase-config.js`** ထဲ Project URL + anon key ထည့်ပါ
-- လူတိုင်း post ဖတ်လို့ရတယ် — မင်းပဲ login ဝင်ပြီး post တင် / ဖျက် လို့ရတယ်
-- Post တဲ့အခါ ပုံလည်း တွဲတင်လို့ရတယ် (Supabase Storage မှာ သိမ်းတယ်)
 
 ## ကိုယ်ပိုင် domain
 

@@ -4,7 +4,7 @@
 <script>try{document.documentElement.setAttribute("data-theme",localStorage.getItem("site-theme")||(matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light"))}catch(e){}</script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Posts — news, updates and casual posts — KXK" />
+  <meta name="description" content="Posts — news, updates, like, comment and share — KXK" />
   <title>Posts — KXK</title>
   <link rel="stylesheet" href="style.css" />
 </head>
@@ -17,49 +17,51 @@
     <section class="page-hero">
       <div class="container">
         <h1 data-i18n data-en="Posts" data-mm="ပို့စ်များ">Posts</h1>
-        <p data-i18n data-en="News, updates and casual posts" data-mm="သတင်း၊ အပ်ဒိတ်နဲ့ အပျင်းပြေ ပို့စ်များ">News, updates and casual posts</p>
+        <p data-i18n data-en="Share, like, comment — everyone can join" data-mm="တင်မယ်၊ like လုပ်မယ်၊ comment ပေးမယ် — လူတိုင်း ပါဝင်လို့ရတယ်">Share, like, comment — everyone can join</p>
       </div>
     </section>
 
     <section class="section">
       <div class="container">
 
-        <!-- Supabase setup မပြီးသေးရင် ပြမယ် -->
         <p class="setup-note" id="setupNote" style="display:none;" data-i18n
-           data-en="Posts are not configured yet — open SUPABASE-SETUP.md in the project folder and follow the steps."
-           data-mm="Posts ကို ချိတ်ဆက်မထားသေးပါ — project folder ထဲက SUPABASE-SETUP.md ကို ဖတ်ပြီး အတိုင်းလိုက်လုပ်ပါ။">
-          Posts are not configured yet — open SUPABASE-SETUP.md in the project folder and follow the steps.
+           data-en="Posts are not configured yet — open SUPABASE-SETUP-V2.md in the project folder and follow the steps."
+           data-mm="Posts ကို ချိတ်ဆက်မထားသေးပါ — project folder ထဲက SUPABASE-SETUP-V2.md ကို ဖတ်ပြီး အတိုင်းလိုက်လုပ်ပါ။">
+          Posts are not configured yet — open SUPABASE-SETUP-V2.md in the project folder and follow the steps.
         </p>
 
-        <!-- ================= ADMIN BAR ================= -->
-        <div class="post-admin" id="postAdmin">
-          <!-- Not logged in -->
-          <button class="btn btn-outline" id="loginBtn" type="button" data-i18n
-                  data-en="＋ Post (Admin Login)" data-mm="＋ Post တင်ရန် (Admin ဝင်ရန်)">＋ Post (Admin Login)</button>
-
-          <!-- Logged in: compose box -->
-          <div class="compose-box" id="composeBox" style="display:none;">
-            <textarea id="postText" rows="4" placeholder="Share something..."></textarea>
-            <div class="compose-actions">
-              <label class="file-btn" id="fileLabel">
-                <input type="file" id="postImage" accept="image/*" />
-                <span data-i18n data-en="📷 Add image" data-mm="📷 ပုံထည့်ရန်">📷 Add image</span>
-              </label>
-              <span class="file-name" id="fileName"></span>
-              <button class="btn btn-primary" id="submitBtn" type="button" data-i18n
-                      data-en="Post" data-mm="တင်မည်">Post</button>
-            </div>
-            <p class="admin-status" id="adminStatus"></p>
+        <!-- ================= SESSION BAR ================= -->
+        <div class="session-bar" id="sessionBar">
+          <button class="btn btn-outline" id="authBtn" type="button" data-i18n
+                  data-en="Login / Register" data-mm="ဝင်ရန် / အကောင့်ဖွင့်ရန်">Login / Register</button>
+          <div class="session-user" id="sessionUser" style="display:none;">
+            <a class="session-chip" id="meLink" href="profile.html?me">
+              <span class="avatar avatar-sm avatar-letter" id="meAvatar">?</span>
+              <span id="meName">user</span>
+            </a>
+            <button class="btn btn-outline logout-btn-sm" id="logoutBtn" type="button" data-i18n
+                    data-en="Logout" data-mm="ထွက်မည်">Logout</button>
           </div>
+        </div>
 
-          <!-- Logout -->
-          <button class="btn btn-outline logout-btn" id="logoutBtn" type="button" style="display:none;" data-i18n
-                  data-en="Logout" data-mm="ထွက်မည်">Logout</button>
+        <!-- ================= COMPOSE (logged in) ================= -->
+        <div class="compose-box" id="composeBox" style="display:none;">
+          <textarea id="postText" rows="3" placeholder="Share something..."></textarea>
+          <div class="compose-actions">
+            <label class="file-btn" id="fileLabel">
+              <input type="file" id="postImage" accept="image/*" />
+              <span data-i18n data-en="📷 Add image" data-mm="📷 ပုံထည့်ရန်">📷 Add image</span>
+            </label>
+            <span class="file-name" id="fileName"></span>
+            <button class="btn btn-primary" id="submitBtn" type="button" data-i18n
+                    data-en="Post" data-mm="တင်မည်">Post</button>
+          </div>
+          <p class="admin-status" id="adminStatus"></p>
         </div>
 
         <!-- ================= FEED ================= -->
         <div class="post-feed" id="postFeed"></div>
-        <p class="support-note" id="postEmpty" style="display:none;">No posts yet — be the first to post!</p>
+        <p class="support-note" id="postEmpty" style="display:none;"></p>
 
       </div>
     </section>
@@ -67,19 +69,40 @@
 
   <footer id="siteFooter"></footer>
 
-  <!-- Admin login modal (script.js ရဲ့ lightbox နဲ့ မရောထွေးအောင် id=loginModal သုံးထား) -->
-  <div class="lightbox" id="loginModal" aria-hidden="true">
-    <div class="login-card">
-      <h3 data-i18n data-en="Admin Login" data-mm="အက်ဒမင် ဝင်ရန်">Admin Login</h3>
-      <p class="login-hint" data-i18n data-en="Use the Supabase account you created." data-mm="Supabase မှာ ဖွင့်ထားတဲ့ အကောင့်နဲ့ ဝင်ပါ။">Use the Supabase account you created.</p>
-      <form id="loginForm" novalidate>
+  <!-- ================= AUTH MODAL (login / register) ================= -->
+  <div class="lightbox" id="authModal" aria-hidden="true">
+    <div class="auth-card">
+      <button class="login-close" id="authClose" type="button" aria-label="Close">×</button>
+
+      <div class="auth-tabs">
+        <button class="auth-tab active" id="tabLogin" type="button" data-i18n
+                data-en="Login" data-mm="ဝင်မည်">Login</button>
+        <button class="auth-tab" id="tabRegister" type="button" data-i18n
+                data-en="Register" data-mm="အကောင့်ဖွင့်ရန်">Register</button>
+      </div>
+
+      <!-- Login -->
+      <form id="loginForm" class="auth-form" novalidate>
         <input class="field" id="loginEmail" type="email" placeholder="Email" autocomplete="email" required />
         <input class="field" id="loginPassword" type="password" placeholder="Password" autocomplete="current-password" required />
         <p class="login-error" id="loginError"></p>
         <button class="btn btn-primary login-submit" type="submit" data-i18n
                 data-en="Login" data-mm="ဝင်မည်">Login</button>
       </form>
-      <button class="login-close" id="loginClose" type="button" aria-label="Close">×</button>
+
+      <!-- Register -->
+      <form id="registerForm" class="auth-form" style="display:none;" novalidate>
+        <input class="field" id="regName" type="text" placeholder="Display name" autocomplete="name" required />
+        <input class="field" id="regEmail" type="email" placeholder="Email" autocomplete="email" required />
+        <input class="field" id="regPassword" type="password" placeholder="Password (min 6 characters)" autocomplete="new-password" required />
+        <p class="login-success" id="regSuccess"></p>
+        <p class="login-error" id="regError"></p>
+        <button class="btn btn-primary login-submit" type="submit" data-i18n
+                data-en="Create account" data-mm="အကောင့် ဖန်တီးမည်">Create account</button>
+        <p class="login-hint" data-i18n
+           data-en="We will send a confirmation link to your email. Check your inbox (and spam) before logging in."
+           data-mm="အတည်ပြုဖို့ link တစ်ခု မင်း email ကို ပို့ပေးပါမယ်။ ဝင်ခင် inbox (နဲ့ spam) ကို စစ်ပါ။">We will send a confirmation link to your email. Check your inbox (and spam) before logging in.</p>
+      </form>
     </div>
   </div>
 

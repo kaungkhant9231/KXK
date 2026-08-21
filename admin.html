@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>try{document.documentElement.setAttribute("data-theme",localStorage.getItem("site-theme")||(matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light"))}catch(e){}</script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Admin panel — KXK" />
+  <title>Admin — KXK</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <header id="siteHeader"></header>
+
+  <main>
+    <section class="page-hero">
+      <div class="container">
+        <h1 data-i18n data-en="Admin Panel" data-mm="အက်ဒမင် Panel">Admin Panel</h1>
+        <p data-i18n data-en="Manage users, posts and comments" data-mm="User၊ post နဲ့ comment တွေကို စီမံပါ">Manage users, posts and comments</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+
+        <p class="setup-note" id="setupNote" style="display:none;" data-i18n
+           data-en="Not configured yet — follow SUPABASE-SETUP-V2.md in the project folder."
+           data-mm="ချိတ်ဆက်မထားသေးပါ — project folder ထဲက SUPABASE-SETUP-V2.md ကို ဖတ်ပါ။">
+          Not configured yet — follow SUPABASE-SETUP-V2.md in the project folder.
+        </p>
+
+        <!-- Login (admin only) -->
+        <div class="compose-box" id="loginBox" style="display:none; max-width:420px; margin:0 auto 24px;">
+          <h3 data-i18n data-en="Admin Login" data-mm="အက်ဒမင် ဝင်ရန်">Admin Login</h3>
+          <input class="field" id="aEmail" type="email" placeholder="Email" style="margin-top:12px;" />
+          <input class="field" id="aPass" type="password" placeholder="Password" />
+          <p class="login-error" id="aError"></p>
+          <button class="btn btn-primary login-submit" id="aLogin" type="button" data-i18n
+                  data-en="Login" data-mm="ဝင်မည်">Login</button>
+        </div>
+
+        <!-- Denied -->
+        <div id="deniedBox" style="display:none;">
+          <p class="support-note" data-i18n data-en="Access denied — this page is for the admin only."
+             data-mm="ဝင်ခွင့်မရှိပါ — ဒီစာမျက်နှာက admin အတွက်သာ ဖြစ်ပါတယ်။">Access denied — this page is for the admin only.</p>
+        </div>
+
+        <!-- Panel -->
+        <div id="panel" style="display:none;">
+          <div class="admin-tabs">
+            <button class="auth-tab active" id="tabUsers" type="button" data-i18n
+                    data-en="Users" data-mm="User များ">Users</button>
+            <button class="auth-tab" id="tabPosts" type="button" data-i18n
+                    data-en="Posts" data-mm="ပို့စ်များ">Posts</button>
+            <button class="auth-tab" id="tabComments" type="button" data-i18n
+                    data-en="Comments" data-mm="Comment များ">Comments</button>
+            <button class="btn btn-outline logout-btn-sm" id="aLogout" type="button" data-i18n
+                    data-en="Logout" data-mm="ထွက်မည်">Logout</button>
+          </div>
+
+          <div class="admin-panel" id="usersPanel">
+            <div class="table-wrap">
+              <table class="admin-table">
+                <thead>
+                  <tr>
+                    <th data-i18n data-en="User" data-mm="User">User</th>
+                    <th data-i18n data-en="Email" data-mm="Email">Email</th>
+                    <th data-i18n data-en="Joined" data-mm="ရက်စွဲ">Joined</th>
+                    <th data-i18n data-en="Confirmed" data-mm="Confirmed">Confirmed</th>
+                    <th data-i18n data-en="Status" data-mm="အခြေအနေ">Status</th>
+                    <th data-i18n data-en="Actions" data-mm="လုပ်ဆောင်ချက်">Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="usersBody"></tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="admin-panel" id="postsPanel" style="display:none;"></div>
+          <div class="admin-panel" id="commentsPanel" style="display:none;"></div>
+
+          <p class="admin-status" id="aStatus"></p>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <footer id="siteFooter"></footer>
+
+  <script src="supabase-config.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="admin.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
